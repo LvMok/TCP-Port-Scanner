@@ -21,7 +21,6 @@ def send_packet(port):
     session.settimeout(.5)
 
     try:
-        
         connect = session.connect_ex((addr,port))
         if connect == 0:
             success_port.append(port)
@@ -45,6 +44,10 @@ fail_port.sort()
 
 for i in success_port:
     print(f"Port {i} is Open")
+
+print("==================================== line ====================================")
+for i in fail_port:
+    print(f"Port {i} is Closed")
     
 end_time = time.time()
 

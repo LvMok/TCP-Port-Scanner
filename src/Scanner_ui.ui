@@ -35,7 +35,7 @@
    <string notr="true">Routing System v.Beta</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="Route/icon.qrc">
+   <iconset>
     <normaloff>:/Icon/Icon.png</normaloff>:/Icon/Icon.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
@@ -65,171 +65,57 @@
      <number>10</number>
     </property>
     <item row="0" column="0">
-     <layout class="QGridLayout" name="gridLayout" rowminimumheight="0,0">
-      <item row="0" column="1">
-       <widget class="QLineEdit" name="hop">
-        <property name="enabled">
-         <bool>true</bool>
-        </property>
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="2">
-       <widget class="QLabel" name="label_2">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="font">
-         <font>
-          <family>Bahnschrift SemiBold</family>
-          <pointsize>11</pointsize>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="text">
-         <string>Target IP</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="3">
-       <widget class="QLineEdit" name="tip">
-        <property name="enabled">
-         <bool>true</bool>
-        </property>
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-       </widget>
-      </item>
+     <layout class="QGridLayout" name="gridLayout">
       <item row="0" column="0">
-       <widget class="QLabel" name="label">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
+       <widget class="QTabWidget" name="tabWidget">
         <property name="font">
          <font>
-          <family>Bahnschrift SemiBold</family>
-          <pointsize>11</pointsize>
-          <weight>75</weight>
-          <bold>true</bold>
+          <family>MBC 1961Gulim</family>
          </font>
         </property>
-        <property name="text">
-         <string>Hops</string>
+        <property name="currentIndex">
+         <number>0</number>
         </property>
-       </widget>
-      </item>
-      <item row="0" column="4">
-       <widget class="QPushButton" name="comfirm">
-        <property name="enabled">
-         <bool>true</bool>
-        </property>
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="font">
-         <font>
-          <family>Bahnschrift SemiBold</family>
-          <pointsize>10</pointsize>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="autoFillBackground">
-         <bool>false</bool>
-        </property>
-        <property name="text">
-         <string>Trace Route</string>
-        </property>
-        <property name="checkable">
-         <bool>true</bool>
-        </property>
-        <property name="checked">
-         <bool>false</bool>
-        </property>
-        <property name="autoRepeat">
-         <bool>false</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="0" colspan="5">
-       <widget class="QTreeWidget" name="treeWidget">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-          <horstretch>2</horstretch>
-          <verstretch>2</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="sizeIncrement">
-         <size>
-          <width>1</width>
-          <height>1</height>
-         </size>
-        </property>
-        <property name="sizeAdjustPolicy">
-         <enum>QAbstractScrollArea::AdjustIgnored</enum>
-        </property>
-        <property name="animated">
-         <bool>false</bool>
-        </property>
-        <property name="allColumnsShowFocus">
-         <bool>false</bool>
-        </property>
-        <attribute name="headerVisible">
-         <bool>true</bool>
-        </attribute>
-        <attribute name="headerCascadingSectionResizes">
-         <bool>true</bool>
-        </attribute>
-        <attribute name="headerDefaultSectionSize">
-         <number>220</number>
-        </attribute>
-        <attribute name="headerShowSortIndicator" stdset="0">
-         <bool>false</bool>
-        </attribute>
-        <column>
-         <property name="text">
-          <string notr="true">Packet Destination</string>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string notr="true">Route IP</string>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string notr="true">Hops</string>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string notr="true">Timeout</string>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>Message</string>
-         </property>
-        </column>
+        <widget class="QWidget" name="MainTab">
+         <attribute name="title">
+          <string>Main</string>
+         </attribute>
+         <widget class="QTreeWidget" name="treeWidget">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>1051</width>
+            <height>621</height>
+           </rect>
+          </property>
+          <column>
+           <property name="text">
+            <string>Port Name</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Temp</string>
+           </property>
+          </column>
+          <item>
+           <property name="text">
+            <string>Port 88</string>
+           </property>
+           <item>
+            <property name="text">
+             <string>Name</string>
+            </property>
+           </item>
+          </item>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="Setting_Tab">
+         <attribute name="title">
+          <string>Settings</string>
+         </attribute>
+        </widget>
        </widget>
       </item>
      </layout>
@@ -237,8 +123,6 @@
    </layout>
   </widget>
  </widget>
- <resources>
-  <include location="Route/icon.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>
