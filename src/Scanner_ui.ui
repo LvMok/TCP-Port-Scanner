@@ -38,6 +38,9 @@
    <iconset>
     <normaloff>:/Icon/Icon.png</normaloff>:/Icon/Icon.png</iconset>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(240, 240, 240);</string>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <property name="enabled">
     <bool>true</bool>
@@ -70,11 +73,12 @@
        <widget class="QTabWidget" name="tabWidget">
         <property name="font">
          <font>
-          <family>MBC 1961Gulim</family>
+          <family>Cascadia Mono</family>
+          <italic>false</italic>
          </font>
         </property>
         <property name="currentIndex">
-         <number>0</number>
+         <number>1</number>
         </property>
         <widget class="QWidget" name="MainTab">
          <attribute name="title">
@@ -84,11 +88,25 @@
           <property name="geometry">
            <rect>
             <x>0</x>
-            <y>0</y>
+            <y>50</y>
             <width>1051</width>
-            <height>621</height>
+            <height>571</height>
            </rect>
           </property>
+          <property name="font">
+           <font>
+            <family>Cascadia Mono</family>
+            <underline>false</underline>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(255, 255, 255);</string>
+          </property>
+          <column>
+           <property name="text">
+            <string>Port Number</string>
+           </property>
+          </column>
           <column>
            <property name="text">
             <string>Port Name</string>
@@ -96,25 +114,119 @@
           </column>
           <column>
            <property name="text">
-            <string>Temp</string>
+            <string>Statu</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Message</string>
            </property>
           </column>
           <item>
            <property name="text">
             <string>Port 88</string>
            </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
            <item>
             <property name="text">
              <string>Name</string>
             </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
            </item>
           </item>
+         </widget>
+         <widget class="QPushButton" name="pushButton">
+          <property name="geometry">
+           <rect>
+            <x>970</x>
+            <y>10</y>
+            <width>75</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Cascadia Mono</family>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(216, 216, 216);</string>
+          </property>
+          <property name="text">
+           <string>SCAN</string>
+          </property>
+         </widget>
+         <widget class="QPlainTextEdit" name="plainTextEdit">
+          <property name="geometry">
+           <rect>
+            <x>700</x>
+            <y>10</y>
+            <width>256</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>Cascadia Mono</family>
+            <pointsize>9</pointsize>
+           </font>
+          </property>
+          <property name="layoutDirection">
+           <enum>Qt::LeftToRight</enum>
+          </property>
+          <property name="autoFillBackground">
+           <bool>false</bool>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(255, 255, 255);</string>
+          </property>
+          <property name="tabChangesFocus">
+           <bool>false</bool>
+          </property>
+          <property name="undoRedoEnabled">
+           <bool>true</bool>
+          </property>
+          <property name="backgroundVisible">
+           <bool>false</bool>
+          </property>
+          <property name="placeholderText">
+           <string notr="true">Input IP Address or Domain Name</string>
+          </property>
          </widget>
         </widget>
         <widget class="QWidget" name="Setting_Tab">
          <attribute name="title">
           <string>Settings</string>
          </attribute>
+         <widget class="QListWidget" name="listWidget">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>10</y>
+            <width>1031</width>
+            <height>601</height>
+           </rect>
+          </property>
+         </widget>
         </widget>
        </widget>
       </item>

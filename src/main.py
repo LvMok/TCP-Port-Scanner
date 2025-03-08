@@ -1,4 +1,5 @@
 import sys
+import os
 import socket as sock
 import ipaddress as checker
 
@@ -15,7 +16,9 @@ class Window(QMainWindow):
         pass
 
 if __name__ == '__main__':
+    os.chdir(str(os.getcwd())+'\\src')
+    
     app = QApplication(sys.argv)
-    window = uic.loadUi('main.ui')
-    window.show()
-    sys.exit(app.exec_())
+    myWindow = Window()
+    myWindow.show()
+    app.exec_()
