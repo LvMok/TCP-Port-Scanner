@@ -11,9 +11,12 @@ class Window(QMainWindow):
         super().__init__()
         self.ui = uic.loadUi("Scanner_ui.ui",self)
         self.ui.show()
+        
+        self.run()
     
     def run(self):
-        pass
+        print("self.FileMode")
+        self.FileMode.setVisible(False)
 
 if __name__ == '__main__':
     os.chdir(str(os.getcwd())+'\\src')
