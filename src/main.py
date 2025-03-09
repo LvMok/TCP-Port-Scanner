@@ -15,8 +15,7 @@ class Window(QMainWindow):
         self.run()
     
     def run(self):
-        print("self.FileMode")
-        self.FileMode.setVisible(False)
+        pass
 
 if __name__ == '__main__':
     os.chdir(str(os.getcwd())+'\\src')

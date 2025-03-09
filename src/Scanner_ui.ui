@@ -22,7 +22,7 @@
   <property name="minimumSize">
    <size>
     <width>1078</width>
-    <height>665</height>
+    <height>668</height>
    </size>
   </property>
   <property name="maximumSize">
@@ -71,6 +71,12 @@
      <layout class="QGridLayout" name="gridLayout">
       <item row="0" column="0">
        <widget class="QTabWidget" name="tabWidget">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>2</horstretch>
+          <verstretch>2</verstretch>
+         </sizepolicy>
+        </property>
         <property name="font">
          <font>
           <family>Cascadia Mono</family>
@@ -78,13 +84,13 @@
          </font>
         </property>
         <property name="currentIndex">
-         <number>1</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="MainTab">
          <attribute name="title">
           <string>Main</string>
          </attribute>
-         <widget class="QTreeWidget" name="treeWidget">
+         <widget class="QTreeWidget" name="MainTree">
           <property name="geometry">
            <rect>
             <x>0</x>
@@ -92,6 +98,18 @@
             <width>1051</width>
             <height>571</height>
            </rect>
+          </property>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>2</horstretch>
+            <verstretch>2</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="sizeIncrement">
+           <size>
+            <width>1</width>
+            <height>1</height>
+           </size>
           </property>
           <property name="font">
            <font>
@@ -102,6 +120,12 @@
           <property name="styleSheet">
            <string notr="true">background-color: rgb(255, 255, 255);</string>
           </property>
+          <attribute name="headerCascadingSectionResizes">
+           <bool>true</bool>
+          </attribute>
+          <attribute name="headerDefaultSectionSize">
+           <number>230</number>
+          </attribute>
           <column>
            <property name="text">
             <string>Port Number</string>
@@ -151,13 +175,13 @@
            </item>
           </item>
          </widget>
-         <widget class="QPushButton" name="pushButton">
+         <widget class="QPushButton" name="Scan">
           <property name="geometry">
            <rect>
             <x>970</x>
             <y>10</y>
             <width>75</width>
-            <height>31</height>
+            <height>24</height>
            </rect>
           </property>
           <property name="font">
@@ -175,7 +199,7 @@
            <string>SCAN</string>
           </property>
          </widget>
-         <widget class="QPlainTextEdit" name="plainTextEdit">
+         <widget class="QPlainTextEdit" name="Target">
           <property name="geometry">
            <rect>
             <x>700</x>
@@ -198,6 +222,9 @@
           </property>
           <property name="styleSheet">
            <string notr="true">background-color: rgb(255, 255, 255);</string>
+          </property>
+          <property name="verticalScrollBarPolicy">
+           <enum>Qt::ScrollBarAlwaysOff</enum>
           </property>
           <property name="tabChangesFocus">
            <bool>false</bool>
@@ -223,7 +250,7 @@
             <x>10</x>
             <y>10</y>
             <width>1031</width>
-            <height>101</height>
+            <height>111</height>
            </rect>
           </property>
           <property name="font">
@@ -235,7 +262,7 @@
           <property name="title">
            <string notr="true">Target Ports</string>
           </property>
-          <widget class="QRadioButton" name="radioButton">
+          <widget class="QRadioButton" name="ChangeRange">
            <property name="geometry">
             <rect>
              <x>20</x>
@@ -256,7 +283,7 @@
             <bool>true</bool>
            </property>
           </widget>
-          <widget class="QRadioButton" name="radioButton_2">
+          <widget class="QRadioButton" name="ChangeFile">
            <property name="geometry">
             <rect>
              <x>100</x>
@@ -399,13 +426,13 @@
            </widget>
           </widget>
          </widget>
-         <widget class="QGroupBox" name="groupBox_2">
+         <widget class="QGroupBox" name="ScanSetting">
           <property name="geometry">
            <rect>
             <x>10</x>
             <y>130</y>
-            <width>1031</width>
-            <height>221</height>
+            <width>1823</width>
+            <height>162</height>
            </rect>
           </property>
           <property name="font">
@@ -415,19 +442,82 @@
            </font>
           </property>
           <property name="title">
-           <string notr="true">Scan Setting</string>
+           <string notr="true">Scan Settings</string>
           </property>
           <widget class="QCheckBox" name="ClosePort">
            <property name="geometry">
             <rect>
-             <x>620</x>
-             <y>30</y>
-             <width>81</width>
-             <height>20</height>
+             <x>870</x>
+             <y>70</y>
+             <width>143</width>
+             <height>18</height>
             </rect>
            </property>
+           <property name="font">
+            <font>
+             <family>Cascadia Mono</family>
+            </font>
+           </property>
            <property name="text">
-            <string>CheckBox</string>
+            <string>Show Closed Ports</string>
+           </property>
+          </widget>
+          <widget class="QDoubleSpinBox" name="ScanDelay">
+           <property name="geometry">
+            <rect>
+             <x>950</x>
+             <y>29</y>
+             <width>56</width>
+             <height>18</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <double>0.100000000000000</double>
+           </property>
+           <property name="maximum">
+            <double>10.000000000000000</double>
+           </property>
+           <property name="singleStep">
+            <double>0.100000000000000</double>
+           </property>
+           <property name="value">
+            <double>0.100000000000000</double>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label">
+           <property name="geometry">
+            <rect>
+             <x>810</x>
+             <y>30</y>
+             <width>120</width>
+             <height>14</height>
+            </rect>
+           </property>
+           <property name="font">
+            <font>
+             <family>Cascadia Mono</family>
+            </font>
+           </property>
+           <property name="text">
+            <string>Timeout Delay (s)</string>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="Delete">
+           <property name="geometry">
+            <rect>
+             <x>890</x>
+             <y>110</y>
+             <width>114</width>
+             <height>23</height>
+            </rect>
+           </property>
+           <property name="font">
+            <font>
+             <family>Cascadia Mono</family>
+            </font>
+           </property>
+           <property name="text">
+            <string>Delete All Logs</string>
            </property>
           </widget>
          </widget>
