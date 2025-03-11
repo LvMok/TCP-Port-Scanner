@@ -105,7 +105,7 @@
          <enum>Qt::LeftToRight</enum>
         </property>
         <property name="currentIndex">
-         <number>0</number>
+         <number>1</number>
         </property>
         <widget class="QWidget" name="MainTab">
          <property name="sizePolicy">
@@ -170,6 +170,11 @@
           </attribute>
           <column>
            <property name="text">
+            <string>Host</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
             <string>Port Number</string>
            </property>
           </column>
@@ -190,7 +195,10 @@
           </column>
           <item>
            <property name="text">
-            <string>Port 88</string>
+            <string>google.com</string>
+           </property>
+           <property name="text">
+            <string/>
            </property>
            <property name="text">
             <string/>
@@ -203,13 +211,16 @@
            </property>
            <item>
             <property name="text">
-             <string>Name</string>
-            </property>
-            <property name="text">
              <string/>
             </property>
             <property name="text">
-             <string/>
+             <string>Port 3</string>
+            </property>
+            <property name="text">
+             <string>HTTP</string>
+            </property>
+            <property name="text">
+             <string>Open</string>
             </property>
             <property name="text">
              <string/>
@@ -247,40 +258,10 @@
            <string>SCAN</string>
           </property>
          </widget>
-         <widget class="QPushButton" name="StopScan">
-          <property name="geometry">
-           <rect>
-            <x>880</x>
-            <y>10</y>
-            <width>75</width>
-            <height>31</height>
-           </rect>
-          </property>
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="font">
-           <font>
-            <family>Cascadia Mono</family>
-            <pointsize>10</pointsize>
-            <weight>75</weight>
-            <bold>true</bold>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">background-color: rgb(216, 216, 216);</string>
-          </property>
-          <property name="text">
-           <string>STOP</string>
-          </property>
-         </widget>
          <widget class="QLineEdit" name="Target">
           <property name="geometry">
            <rect>
-            <x>512</x>
+            <x>590</x>
             <y>10</y>
             <width>361</width>
             <height>31</height>
@@ -641,6 +622,9 @@
              <verstretch>0</verstretch>
             </sizepolicy>
            </property>
+           <property name="contextMenuPolicy">
+            <enum>Qt::PreventContextMenu</enum>
+           </property>
            <property name="styleSheet">
             <string notr="true">background-color: rgb(255, 255, 255);</string>
            </property>
@@ -654,7 +638,7 @@
             <double>0.100000000000000</double>
            </property>
            <property name="value">
-            <double>0.100000000000000</double>
+            <double>1.000000000000000</double>
            </property>
           </widget>
           <widget class="QLabel" name="label">
