@@ -105,7 +105,7 @@
          <enum>Qt::LeftToRight</enum>
         </property>
         <property name="currentIndex">
-         <number>1</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="MainTab">
          <property name="sizePolicy">
@@ -193,40 +193,6 @@
             <string>Message</string>
            </property>
           </column>
-          <item>
-           <property name="text">
-            <string>google.com</string>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <item>
-            <property name="text">
-             <string/>
-            </property>
-            <property name="text">
-             <string>Port 3</string>
-            </property>
-            <property name="text">
-             <string>HTTP</string>
-            </property>
-            <property name="text">
-             <string>Open</string>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-           </item>
-          </item>
          </widget>
          <widget class="QPushButton" name="Scan">
           <property name="geometry">

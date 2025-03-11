@@ -10,12 +10,13 @@ from PyQt5 import uic
 import asyncio
 import qasync
 
+import re
+
 
 Start_port = 1
 End_port = 81
 FilePath = ""
 
-Current_PortRMode = "Range"
 
 class Window(QMainWindow):
     def __init__(self):
@@ -31,6 +32,7 @@ class Window(QMainWindow):
         FileFrame.findChild(QWidget,'FileConfirm').clicked.connect(self.File_input)
         self.ChangeFile.clicked.connect(self.Change_File)
         self.ChangeRange.clicked.connect(self.Change_range)
+        self.Delete.clicked.connect(self.delete_all_item)
 
         self.Scan.clicked.connect(lambda: asyncio.create_task(self.scan()))
 
@@ -40,6 +42,7 @@ class Window(QMainWindow):
         self.isShowClosePort = False
         self.timeout_sec = 1
         self.ScanPorts = list()
+        self.CurrentPortRMode = "Range"
 
     def read_portfile(self):
         try:
@@ -75,10 +78,7 @@ class Window(QMainWindow):
                     else:
                         continue
         except Exception as e:
-            print(e)
-
-                
-                
+            self.CurrentPortRMode = "File_Error"
 
 
 
@@ -121,23 +121,20 @@ class Window(QMainWindow):
             writer.close()
             await writer.wait_closed()
 
-        except asyncio.TimeoutError:
-            newPort.setText(3, "Closed 🔴")
-            is_close_port = True
-
         except ConnectionRefusedError:
             newPort.setText(3, "Closed 🔴")
             newPort.setText(4, "Connection Refused")
+            is_close_port = True
+
+        except asyncio.TimeoutError:
+            newPort.setText(3, "Closed 🔴")
             is_close_port = True
         
         except asyncio.CancelledError:
             newPort.setText(3, "Closed 🔴")
             newPort.setText(4, "Cancelled")
             is_close_port = True
-
-        except Exception as e:
-            print(e)
-            newPort.setText(4, "Something Error Inbound")
+            return
 
         if is_close_port and not self.isShowClosePort:
             self.temp_tree.removeChild(newPort)
@@ -146,7 +143,7 @@ class Window(QMainWindow):
 
     
     async def scan(self):
-        if Current_PortRMode == "File":
+        if self.CurrentPortRMode == "File":
             self.read_portfile()
             self.ScanPorts = list(set(self.ScanPorts))
             self.ScanPorts.sort()
@@ -154,37 +151,54 @@ class Window(QMainWindow):
         self.show_loading()
 
         self.temp_tree = QTreeWidgetItem(self.MainTree)
+        if self.CurrentPortRMode == "File_Error":
+            self.temp_tree.setText(0,"File Error")
+            self.temp_tree.setText(4,"Please Check Your Port File Location")
+            self.close_loading()
+            return
+        
         self.Scan.setEnabled(False)
 
         # get Setting Part
         target = self.Target.text()
         self.timeout_sec = self.ScanDelay.value()
         self.isShowClosePort = self.ClosePort.isChecked()
-
         self.temp_tree.setText(0,target)
+
+        if target.count('.') == 0 or target.count('.') >= len(target) or re.search(r'[^a-zA-Z0-9.]', target):
+            self.temp_tree.setText(4,"Not Vaild Host")
+            self.close_loading()
+            self.Scan.setEnabled(True)
+            return
+        
         # end Setting Part
 
         self.Tasks.clear()
 
         start_time = time.time()
 
-        try:
-            if Current_PortRMode == "File":
+        if self.CurrentPortRMode == "File":
+            try:
                 task = [self.send_packet(target, port) for port in self.ScanPorts]
                 await asyncio.gather(*task)
-            else:
+            except Exception as e:
+                self.temp_tree.setText(4,"Not Vaild Host")
+                self._stopScan()
+            
+        elif self.CurrentPortRMode == "Range":
+            try:
                 task = [self.send_packet(target, port) for port in range(Start_port,End_port+1)]
                 await asyncio.gather(*task)
-    
-        except Exception as e:
-            self.temp_tree.setText(4,"Not Vaild Host")
-            print(e)
-            self._stopScan()
+            except Exception as e:
+                self.temp_tree.setText(4,"Not Vaild Host")
+                self._stopScan()
 
-        print("==================================== line ====================================")
 
         end_time = time.time()
         self.temp_tree.setText(0,f"{target} ({end_time-start_time:.2f}s)")
+
+        if self.CurrentPortRMode == "File_Error":
+            self.CurrentPortRMode = "File"
 
         self.temp_tree = None
         self.Scan.setEnabled(True)
@@ -230,37 +244,37 @@ class Window(QMainWindow):
         global FilePath
         FilePath = filepath
 
+        self.CurrentPortRMode = "File"
         self.FileName.setText(filepath)
 
 
     # UI Function
     def Change_File(self):
-        global Current_PortRMode
 
         self.FileMode.show()
         self.RangeMode.hide()
 
-        Current_PortRMode = "File"
+        self.CurrentPortRMode = "File"
     
     def Change_range(self):
-        global Current_PortRMode
 
         self.FileMode.hide()
         self.RangeMode.show()
 
-        Current_PortRMode = "Range"
+        self.CurrentPortRMode = "Range"
     
     def _stopScan(self):
-        print("Stopping Scan...")
-        self.TreadIsRunning = False  # ✅ 스캔 중단 플래그 설정
+        self.TreadIsRunning = False  #스캔 중단 플래그 설정
 
-        # ✅ 현재 실행 중인 모든 태스크 취소
+        #현재 실행 중인 모든 태스크 취소
         for task in self.Tasks:
             if not task.done():  # 완료되지 않은 경우만 취소
                 task.cancel()
 
         self.Tasks.clear()
-        print("Scan Stopped.")
+    
+    def delete_all_item(self):
+        self.MainTree.clear()
 
 
 
