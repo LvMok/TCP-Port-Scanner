@@ -1,4 +1,3 @@
-import ipaddress
 import time
 import concurrent.futures
 import socket as sock

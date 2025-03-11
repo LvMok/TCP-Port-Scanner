@@ -31,6 +31,9 @@
     <height>668</height>
    </size>
   </property>
+  <property name="focusPolicy">
+   <enum>Qt::ClickFocus</enum>
+  </property>
   <property name="windowTitle">
    <string notr="true">Port Scanner</string>
   </property>
@@ -102,7 +105,7 @@
          <enum>Qt::LeftToRight</enum>
         </property>
         <property name="currentIndex">
-         <number>1</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="MainTab">
          <property name="sizePolicy">
@@ -220,7 +223,7 @@
             <x>970</x>
             <y>10</y>
             <width>75</width>
-            <height>24</height>
+            <height>31</height>
            </rect>
           </property>
           <property name="sizePolicy">
@@ -244,44 +247,67 @@
            <string>SCAN</string>
           </property>
          </widget>
-         <widget class="QPlainTextEdit" name="Target">
+         <widget class="QPushButton" name="StopScan">
           <property name="geometry">
            <rect>
-            <x>700</x>
+            <x>880</x>
             <y>10</y>
-            <width>256</width>
+            <width>75</width>
             <height>31</height>
            </rect>
+          </property>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
           </property>
           <property name="font">
            <font>
             <family>Cascadia Mono</family>
-            <pointsize>9</pointsize>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
            </font>
           </property>
-          <property name="layoutDirection">
-           <enum>Qt::LeftToRight</enum>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(216, 216, 216);</string>
           </property>
-          <property name="autoFillBackground">
-           <bool>false</bool>
+          <property name="text">
+           <string>STOP</string>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="Target">
+          <property name="geometry">
+           <rect>
+            <x>512</x>
+            <y>10</y>
+            <width>361</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="font">
+           <font>
+            <family>Cascadia Mono</family>
+           </font>
+          </property>
+          <property name="focusPolicy">
+           <enum>Qt::ClickFocus</enum>
           </property>
           <property name="styleSheet">
            <string notr="true">background-color: rgb(255, 255, 255);</string>
           </property>
-          <property name="verticalScrollBarPolicy">
-           <enum>Qt::ScrollBarAlwaysOff</enum>
-          </property>
-          <property name="tabChangesFocus">
-           <bool>false</bool>
-          </property>
-          <property name="undoRedoEnabled">
-           <bool>true</bool>
-          </property>
-          <property name="backgroundVisible">
-           <bool>false</bool>
-          </property>
           <property name="placeholderText">
-           <string notr="true">Input IP Address or Domain Name</string>
+           <string>Input Ip Address or Domain (ex. google.com)</string>
+          </property>
+          <property name="cursorMoveStyle">
+           <enum>Qt::VisualMoveStyle</enum>
           </property>
          </widget>
         </widget>
@@ -412,6 +438,9 @@
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: rgb(216, 216, 216);</string>
+            </property>
             <property name="text">
              <string>...</string>
             </property>
@@ -435,6 +464,9 @@
              <font>
               <family>Cascadia Mono</family>
              </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: rgb(255, 255, 255);</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -461,6 +493,9 @@
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(240, 240, 240);</string>
            </property>
            <property name="frameShape">
             <enum>QFrame::StyledPanel</enum>
@@ -491,6 +526,9 @@
             </property>
             <property name="mouseTracking">
              <bool>false</bool>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: rgb(255, 255, 255);</string>
             </property>
             <property name="inputMask">
              <string notr="true"/>
@@ -527,6 +565,9 @@
              <font>
               <family>Cascadia Mono</family>
              </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: rgb(216, 216, 216);</string>
             </property>
             <property name="text">
              <string>Confirm</string>
@@ -578,6 +619,9 @@
              <family>Cascadia Mono</family>
             </font>
            </property>
+           <property name="styleSheet">
+            <string notr="true"/>
+           </property>
            <property name="text">
             <string>Show Closed Ports</string>
            </property>
@@ -596,6 +640,9 @@
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(255, 255, 255);</string>
            </property>
            <property name="minimum">
             <double>0.100000000000000</double>
@@ -653,6 +700,9 @@
             <font>
              <family>Cascadia Mono</family>
             </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(216, 216, 216);</string>
            </property>
            <property name="text">
             <string>Delete All Logs</string>
