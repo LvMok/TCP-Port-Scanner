@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import sys
 import os
 
@@ -285,7 +287,6 @@ def suppress_qt_warnings():
     os.environ["QT_SCALE_FACTOR"] = "1"
 
 if __name__ == '__main__':
-    os.chdir(str(os.getcwd())+'\\src')
     
     suppress_qt_warnings()
 
