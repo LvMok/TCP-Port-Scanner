@@ -1,0 +1,8 @@
+Port File Format
+
+형식 1) Number1 ~ Number2 | Number3 ~ Number4 : Number 부터 Number까지
+형식 2) Number1, Number2, Number3 : Number1, Number2, Number3 사용
+형식 3) !Number1 | !Number2 | !Number3 : Number1, Number2, Number3 제외
+
+같은 줄에는 같은 형식만 사용가능
+여러 줄에 다양한 형식 사용가능
