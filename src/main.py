@@ -28,10 +28,13 @@ class Window(QMainWindow):
 
         RangeFrame = self.Setting_Tab.findChild(QWidget,'TargetPort').findChild(QWidget,'RangeMode')
         FileFrame = self.Setting_Tab.findChild(QWidget,'TargetPort').findChild(QWidget,'FileMode')
+        PFileFrame = self.Setting_Tab.findChild(QWidget, 'PortName').findChild(QWidget,'PFile')
         self.LoadingUI = None
 
         RangeFrame.findChild(QWidget,'RangeConfirm').clicked.connect(self.Range_input)
         FileFrame.findChild(QWidget,'FileConfirm').clicked.connect(self.File_input)
+        PFileFrame.findChild(QWidget,'PFile_confirm').clicked.connect(self.PFile_input)
+
         self.ChangeFile.clicked.connect(self.Change_File)
         self.ChangeRange.clicked.connect(self.Change_range)
         self.Delete.clicked.connect(self.delete_all_item)
@@ -45,6 +48,9 @@ class Window(QMainWindow):
         self.timeout_sec = 1
         self.ScanPorts = list()
         self.CurrentPortRMode = "Range"
+        self.PFilePath = ""
+
+        self.PortNames = {}
 
     def read_portfile(self):
         try:
@@ -81,6 +87,27 @@ class Window(QMainWindow):
                         continue
         except Exception as e:
             self.CurrentPortRMode = "File_Error"
+        
+    def PFile_read(self):
+        try:
+            with open(self.PFilePath, 'r') as f:
+                for line in f:
+                    raw = line.strip()
+                    if raw.count(':') > 0:
+                        splited = raw.split(',')
+                        for section in splited:
+                            section = section.strip()
+                            split2 = section.split(':')
+
+                            if split2[0].isdigit():
+                                self.PortNames[split2[0].strip()] = split2[1].strip()
+                        else:
+                            continue
+                    else:
+                        continue
+
+        except Exception as e:
+            print(e)
 
 
 
@@ -102,7 +129,8 @@ class Window(QMainWindow):
     async def send_packet(self, target, port):
         newPort = QTreeWidgetItem(self.temp_tree)
         newPort.setText(1, f"Port {port}")
-        newPort.setText(2, "None")
+
+        newPort.setText(2, self.PortNames.get(str(port), "None"))
         
         is_close_port = False
 
@@ -123,7 +151,7 @@ class Window(QMainWindow):
             writer.close()
             await writer.wait_closed()
 
-        except ConnectionRefusedError:
+        except (ConnectionRefusedError,OSError):
             newPort.setText(3, "Closed 🔴")
             newPort.setText(4, "Connection Refused")
             is_close_port = True
@@ -137,6 +165,9 @@ class Window(QMainWindow):
             newPort.setText(4, "Cancelled")
             is_close_port = True
             return
+        
+        except Exception as e:
+            print(e)
 
         if is_close_port and not self.isShowClosePort:
             self.temp_tree.removeChild(newPort)
@@ -151,6 +182,7 @@ class Window(QMainWindow):
             self.ScanPorts.sort()
 
         self.show_loading()
+        self.PFile_read()
 
         self.temp_tree = QTreeWidgetItem(self.MainTree)
         if self.CurrentPortRMode == "File_Error":
@@ -184,6 +216,7 @@ class Window(QMainWindow):
                 task = [self.send_packet(target, port) for port in self.ScanPorts]
                 await asyncio.gather(*task)
             except Exception as e:
+                print(e)
                 self.temp_tree.setText(4,"Not Vaild Host")
                 self._stopScan()
             
@@ -192,6 +225,7 @@ class Window(QMainWindow):
                 task = [self.send_packet(target, port) for port in range(Start_port,End_port+1)]
                 await asyncio.gather(*task)
             except Exception as e:
+                print(f"{e} ex")
                 self.temp_tree.setText(4,"Not Vaild Host")
                 self._stopScan()
 
@@ -248,7 +282,17 @@ class Window(QMainWindow):
 
         self.CurrentPortRMode = "File"
         self.FileName.setText(filepath)
+    
+    def PFile_input(self):
+        self.PFilePath = filedialog.askopenfilename(
+            title="Select Port Name File",
+            filetypes=[("Text files"," *.txt")],
+        )
 
+        if self.PFilePath == "":
+            return
+        
+        self.PFileName.setText(self.PFilePath)
 
     # UI Function
     def Change_File(self):
@@ -310,5 +354,14 @@ Port File Format
 
 같은 줄에는 같은 형식만 사용가능
 여러 줄에 다양한 형식 사용가능
+
+"""
+
+
+"""
+
+Port Name File Format
+
+형식 1) Number1:Name1, Number2:Name2, Number3:Name3  -> NumberN의 이름은 NameN
 
 """

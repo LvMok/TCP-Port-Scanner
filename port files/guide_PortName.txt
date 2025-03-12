@@ -1,0 +1,3 @@
+Port Name File Format
+
+형식 1) Number1:Name1, Number2:Name2, Number3:Name3  -> NumberN 포트의 이름은 NameN

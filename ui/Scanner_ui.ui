@@ -105,7 +105,7 @@
          <enum>Qt::LeftToRight</enum>
         </property>
         <property name="currentIndex">
-         <number>0</number>
+         <number>1</number>
         </property>
         <widget class="QWidget" name="MainTab">
          <property name="sizePolicy">
@@ -657,6 +657,108 @@
            <property name="text">
             <string>Delete All Logs</string>
            </property>
+          </widget>
+         </widget>
+         <widget class="QGroupBox" name="PortName">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>300</y>
+            <width>1031</width>
+            <height>71</height>
+           </rect>
+          </property>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="font">
+           <font>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="title">
+           <string notr="true">Port Name File</string>
+          </property>
+          <widget class="QFrame" name="PFile">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>20</y>
+             <width>1011</width>
+             <height>41</height>
+            </rect>
+           </property>
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="frameShape">
+            <enum>QFrame::StyledPanel</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Raised</enum>
+           </property>
+           <widget class="QToolButton" name="PFile_confirm">
+            <property name="geometry">
+             <rect>
+              <x>960</x>
+              <y>10</y>
+              <width>30</width>
+              <height>21</height>
+             </rect>
+            </property>
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: rgb(216, 216, 216);</string>
+            </property>
+            <property name="text">
+             <string>...</string>
+            </property>
+           </widget>
+           <widget class="QLineEdit" name="PFileName">
+            <property name="geometry">
+             <rect>
+              <x>320</x>
+              <y>10</y>
+              <width>631</width>
+              <height>20</height>
+             </rect>
+            </property>
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="font">
+             <font>
+              <family>Cascadia Mono</family>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: rgb(255, 255, 255);</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+            <property name="placeholderText">
+             <string notr="true">Input File</string>
+            </property>
+           </widget>
           </widget>
          </widget>
         </widget>
