@@ -138,7 +138,7 @@ class Window(QMainWindow):
 
         try:
             task = asyncio.create_task(
-                asyncio.open_connection(target,port=port)
+                asyncio.open_connection(target,port=port,limit=65536)
             )
             self.Tasks.append(task)
 
@@ -199,7 +199,7 @@ class Window(QMainWindow):
         self.isShowClosePort = self.ClosePort.isChecked()
         self.temp_tree.setText(0,target)
 
-        if target.count('.') == 0 or target.count('.') >= len(target) or re.search(r'[^a-zA-Z0-9.]', target):
+        if target.count('.') == 0 or re.search(r'[^a-zA-Z0-9.]', target):
             self.temp_tree.setText(4,"Not Vaild Host")
             self.close_loading()
             self.Scan.setEnabled(True)
